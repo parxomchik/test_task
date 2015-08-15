@@ -1,0 +1,84 @@
+<div class="container Override">
+    <div class="row fill">
+        <div class="wrapper">
+            <div class="col-md-2 sidebar">
+                <p class="marginTop20">Sites</p>
+                <div class="checkbox">
+                <label>
+                <input type="checkbox" value="">
+                Shop Online
+                </label>
+                </div>
+                <div class="checkbox">
+                <label>
+                <input type="checkbox" value="">
+                Travel
+                </label>
+                </div>
+            </div>
+            <div class="col-md-10 paddingFix">
+                <table class="table table-striped " >
+                <thead class="" >
+                <tr class="active clientsTheadColor">
+                <td>
+                </td>
+                    <td>
+                <a  ng-click="sortType = 'CreationDate'; sortReverse = !sortReverse">
+                Creation date
+                    <span ng-show="sortType == 'CreationDate' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
+                <span ng-show="sortType == 'CreationDate' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+                </td>
+                <td>
+                <a  ng-click="sortType = 'site'; sortReverse = !sortReverse">
+                Site
+                <span ng-show="sortType == 'site' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
+                <span ng-show="sortType == 'site' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+                </td>
+                <td>
+                <a  ng-click="sortType = 'lastname'; sortReverse = !sortReverse">
+                Lastname
+                <span ng-show="sortType == 'lastname' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
+                <span ng-show="sortType == 'lastname' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+                </td>
+                <td>
+                <a  ng-click="sortType = 'firtname'; sortReverse = !sortReverse">
+                Firstname
+                <span ng-show="sortType == 'firtname' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
+                <span ng-show="sortType == 'firtname' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+                </td>
+                <td>
+                <a  ng-click="sortType = 'email'; sortReverse = !sortReverse">
+                Email
+                <span ng-show="sortType == 'email' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
+                <span ng-show="sortType == 'email' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+                </td>
+                <td>
+                <a  ng-click="sortType = 'phoneNumber'; sortReverse = !sortReverse">
+                Phone Number
+                <span ng-show="sortType == 'phoneNumber' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
+                <span ng-show="sortType == 'phoneNumber' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+                </td>
+                </tr>
+                </thead>
+                <tbody class="clientsTbodyColor">
+                <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:searchClient">
+                <td><client-button></client-button></td>
+                <td>{{ client.CreationDate }}</td>
+                <td>{{ client.site }}</td>
+                <td>{{ client.lastname }}</td>
+                    <td>{{ client.firtname }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.phoneNumber }}</td>
+                </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>

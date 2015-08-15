@@ -1,0 +1,177 @@
+<script>
+    $(function () {
+        $('#container1').highcharts({
+            title: {
+                text: 'Combination chart'
+            },
+            xAxis: {
+                categories: ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
+            },
+            labels: {
+                items: [{
+                    html: 'Total fruit consumption',
+                    style: {
+                        left: '50px',
+                        top: '18px',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                    }
+                }]
+            },
+            series: [{
+                type: 'column',
+                name: 'Jane',
+                data: [3, 2, 1, 3, 4]
+            }, {
+                type: 'column',
+                name: 'John',
+                data: [2, 3, 5, 7, 6]
+            }, {
+                type: 'column',
+                name: 'Joe',
+                data: [4, 3, 3, 9, 0]
+            }, {
+                type: 'spline',
+                name: 'Average',
+                data: [3, 2.67, 3, 6.33, 3.33],
+                marker: {
+                    lineWidth: 2,
+                    lineColor: Highcharts.getOptions().colors[3],
+                    fillColor: 'white'
+                }
+            }, {
+                type: 'pie',
+                name: 'Total consumption',
+                data: [{
+                    name: 'Jane',
+                    y: 13,
+                    color: Highcharts.getOptions().colors[0] // Jane's color
+                }, {
+                    name: 'John',
+                    y: 23,
+                    color: Highcharts.getOptions().colors[1] // John's color
+                }, {
+                    name: 'Joe',
+                    y: 19,
+                    color: Highcharts.getOptions().colors[2] // Joe's color
+                }],
+                center: [100, 80],
+                size: 100,
+                showInLegend: false,
+                dataLabels: {
+                    enabled: false
+                }
+            }]
+        });
+    });
+
+</script>
+<div class="container Override">
+    <div class="row fill">
+        <div class="wrapper">
+            <div class="col-md-1 sidebar paddingFix">
+                <span id="contactIcon" class="glyphicon glyphicon glyphicon-user center-block" aria-hidden="true"></span>
+                <p class="text-center text-uppercase">contact</p>
+            </div>
+            <div class="col-md-11 paddingFix">
+                <div class="col-md-5">
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-md-5">Email address</label>-->
+                        <!--<input type="email" class="form-control col-md-7" placeholder="Email">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<div class="col-md-4">-->
+                            <!--<label>Email address</label>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-8">-->
+                            <!--<input type="email" class="form-control "  placeholder="Email">-->
+
+                        <!--</div>-->
+                    <form class="form-horizontal marginTop20 paddingLeft10">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label ">Civility</label>
+                            <div class="col-sm-4">
+                                <select class="form-control">
+                                    <option>Mr</option>
+                                    <option>Mrs</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Firstname</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control"  placeholder="Firstname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label ">Lastname</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control"  placeholder="Lastname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label ">Email</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control"  placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group inner-addon left-addon">
+                            <label class="col-sm-3 control-label ">Home phone</label>
+                            <div class="col-sm-8">
+                                <span class="glyphicon glyphicon-earphone phoneIcon"></span>
+                                <input type="text" class="form-control"  placeholder="Home phone number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label ">Mobile phone</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control"  placeholder="mobile phone">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="col-sm-12 control-label vcenter">Adress</label>
+                        </div>
+                        <div class="col-md-8 paddingRightFix">
+                            <div class="form-group">
+                                <div class="col-sm-12 ">
+                                    <input type="text" class="form-control"  placeholder="Adress1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 ">
+                                    <input type="text" class="form-control"  placeholder="Adress2">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 ">
+                                    <div class="col-md-6 paddingLeftFix">
+                                        <input type="text" class="form-control "  placeholder="Post code">
+                                    </div>
+                                    <div class="col-md-6  paddingFix">
+                                        <input type="text" class="form-control "  placeholder="data2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 ">
+                                    <input type="text" class="form-control"  placeholder="Country">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class=" col-sm-12">
+                                    <button type="submit" class="btn btn-success btn-block">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    </div>
+                <div class="col-md-7">
+                    <div id="container1" class="marginTop20" ></div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
