@@ -72,13 +72,14 @@ app.directive('clientButton', function() {
 });
 
 app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
-    $scope.phoneNumbers =[{
+    $scope.phoneNumbers =[
+        {
         title: 'Home',                                      // home, business ...
-        phoneNumber: '111'
+        phoneNumber: ''
     },
         {
             title: 'Mobile',                                // home, business ...
-            phoneNumber: '222'
+            phoneNumber: ''
         }
     ];
     $scope.userContacts = {
@@ -90,21 +91,12 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
         creationDate: '16.08.2015',
         address : {
             title:  'Home',
-            line2: '1',
+            line1: '1',
+            line2: '2',
             postcode: '07300',
             city: 'Paris',
             country: 'France'
         },
-        //phonenumbers:[{
-        //    title: 'Home',                                      // home, business ...
-        //    phonenumber: '0449651365'
-        //},
-        //    {
-        //        title: 'Mobile',                                // home, business ...
-        //        phonenumber: '0933664211'
-        //    }
-        //],
-
         phoneNumbers:$scope.phoneNumbers,
         email: 'test@email.com'
     };
@@ -118,7 +110,14 @@ console.log($scope.userContacts)
         }
     };
 
-
+    //$scope.submitForm = function(isValid) {
+    //
+    //    // check to make sure the form is completely valid
+    //    if (isValid) {
+    //        alert('our form is amazing');
+    //    }
+    //
+    //};
 
     $scope.visit = {
         userAgent: 'User Agent',                                // User Agent of the visitor

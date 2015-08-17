@@ -35,62 +35,49 @@
                             <label class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-8">
                                 <input type="email" class="form-control"  placeholder="Email" ng-model="userContacts.email" required>
-                                <p ng-show="userContacts.email.$invalid && !userContacts.email.$pristine" class="help-block">Enter a valid email.</p>                            </div>
+                                <p ng-show="userContacts.email.$invalid && !userContacts.email.$pristine" class="help-block">Enter a valid email.</p>
+                            </div>
                         </div>
-                        <!--<div class="form-group inner-addon left-addon" ng-class="{ 'has-error' : userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine}">-->
-                            <!--<label class="col-sm-3 control-label " ng-model="userContacts.phoneNumbers.title">Home phone</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<span class="glyphicon glyphicon-earphone phoneIcon"></span>-->
-                                <!--<input type="text" class="form-control"  placeholder="Home phone number" ng-model="userContacts.phoneNumbers.phoneNumber[0]" required>-->
-                                <!--<p ng-show="userContacts.lastname.$invalid && !userContacts.lastname.$pristine" class="help-block">You phone number is required.</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group inner-addon left-addon" ng-class="{ 'has-error' : userContacts.phoneNumber.$invalid && !userContacts.phoneNumber.$pristine}">-->
-                            <!--<label class="col-sm-3 control-label ">Mobile phone</label>-->
-                            <!--<p ng-show="userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine" class="help-block">You lastname is required.</p>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<span class="glyphicon glyphicon-earphone phoneIcon"></span>-->
-                                <!--<input type="text" class="form-control"  placeholder="Mobile phone"  ng-model="userContacts.phoneNumbers.phoneNumber[1]" required>-->
-                                <!--<p ng-show="userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine" class="help-block">You lastname is required.</p>-->
-                            <!--</div>-->
-                        <!--</div> -->
-
-                        <div ng-class="{ 'has-error' : userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine}"></div>
-                        <div class="form-group inner-addon left-addon"  ng-repeat="phoneNumber in phoneNumbers">
+                        <div class="form-group inner-addon left-addon"  ng-repeat="phoneNumber in phoneNumbers" ng-class="{ 'has-error' : userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine}">
                             <label class="col-sm-3 control-label ">{{phoneNumber.title}}</label>
                             <div class="col-sm-8">
                                 <span class="glyphicon glyphicon-earphone phoneIcon"></span>
-                                <input type="text" class="form-control"  placeholder="Home phone number" ng-model="phoneNumber.phoneNumber" required>
+                                <input type="text" class="form-control"  placeholder="{{phoneNumber.title}}" ng-model="phoneNumber.phoneNumber" required>
                                 <p ng-show="userContacts.lastname.$invalid && !userContacts.lastname.$pristine" class="help-block">You phone number is required.</p>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label class="col-sm-12 control-label vcenter">Adress</label>
+                            <label class="col-sm-12 control-label vcenter">Address1</label>
                         </div>
-                        <div class="col-md-8 paddingRightFix">
-                            <div class="form-group">
+                        <div class="col-md-8 addressPadding">
+                            <div class="form-group" ng-class="{ 'has-error' : userContacts.address.line1.$invalid && !userContacts.address.line1.$pristine}">
                                 <div class="col-sm-12 ">
-                                    <input type="text" class="form-control"  placeholder="Adress1">
+                                    <input type="text" class="form-control" ng-model="userContacts.address.line1" placeholder="Adress1" required>
+                                    <p ng-show="userContacts.address.line1.$invalid && !userContacts.address.line1.$pristine" class="help-block">You Address number is required.</p>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : userContacts.address.line2.$invalid && !userContacts.address.line2.$pristine}">
                                 <div class="col-sm-12 ">
-                                    <input type="text" class="form-control"  placeholder="Adress2">
+                                    <input type="text" class="form-control" ng-model="userContacts.address.line2" placeholder="Adress2" required>
+                                    <p ng-show="userContacts.address.line2.$invalid && !userContacts.address.line2.$pristine" class="help-block">You Address is required.</p>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : userContacts.address.postcode.$invalid && !userContacts.address.postcode.$pristine && userContacts.address.city.$invalid}">
                                 <div class="col-sm-12 ">
                                     <div class="col-md-6 paddingLeftFix">
-                                        <input type="number" class="form-control "  placeholder="Post code">
+                                        <input type="number" class="form-control " ng-model="userContacts.address.postcode"  placeholder="Post code" required>
+                                        <p ng-show="userContacts.address.postcode.$invalid && !userContacts.address.postcode.$pristine" class="help-block">You Post code is required.</p>
                                     </div>
                                     <div class="col-md-6  paddingFix">
-                                        <input type="text" class="form-control "  placeholder="City">
+                                        <input type="text" class="form-control " ng-model="userContacts.address.city"  placeholder="City" required>
+                                        <p ng-show="userContacts.address.city.$invalid && !userContacts.address.city.$pristine" class="help-block">You City is required.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : userContacts.address.country.$invalid && !userContacts.address.country.$pristine}">
                                 <div class="col-sm-12 ">
-                                    <input type="text" class="form-control"  placeholder="Country">
+                                    <input type="text" class="form-control" ng-model="userContacts.address.country" placeholder="Country" required>
+                                    <p ng-show="userContacts.address.country.$invalid && !userContacts.address.country.$pristine" class="help-block">You  Country is required.</p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -99,25 +86,15 @@
                                 </div>
                             </div>
                         </div>
-
                     </form>
                     </div>
                 <div class="col-md-7">
-                    <!--<input ng-model="highchartsNG.title.text">-->
-                    <!--<button ng-click="addSeries()">Add Series</button>-->
-                    <!--<button ng-click="addPoints()">Add Points to Random Series</button>-->
-                    <!--<button ng-click="removeRandomSeries()">Remove Random Series</button>-->
-                    <!--<button ng-click="swapChartType()">Line/Bar</button>-->
                     <highchart id="chart1" config="highchartsNG" class="marginTop20"></highchart>
-                <!--</div>-->
-            <!--</div>-->
-                    <!--<div id="container1" class="marginTop20" ></div>-->
-                    <!--<highchart class="chart" config="chartConfig"  ></highchart>-->
                 </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
 
 
