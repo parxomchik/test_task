@@ -11,9 +11,9 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label ">Civility</label>
                             <div class="col-sm-4">
-                                <select class="form-control">
-                                    <option>Mr</option>
-                                    <option>Mrs</option>
+                                <select class="form-control" ng-model="userContacts.civilityFlag" ng-init="userContacts.civilityFlag = 1">
+                                    <option value="1" selected="selected">Mr</option>
+                                    <option value="2">Mrs</option>
                                 </select>
                             </div>
                         </div>
