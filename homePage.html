@@ -23,10 +23,14 @@
                 <td>
                 </td>
                     <td>
-                <a  ng-click="sortType = 'CreationDate'; sortReverse = !sortReverse">
-                Creation date
-                    <span ng-show="sortType == 'CreationDate' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
-                <span ng-show="sortType == 'CreationDate' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                <a class="displayBlock" ng-click="sortType = 'CreationDate'; sortReverse = !sortReverse">
+                    <div class="col-lg-7 paddingFix">Creation date</div>
+                    <div class="col-lg-1 paddingFix">
+                        <span  class="glyphicon glyphicon-triangle-top displayBlock" ng-show="sortType == 'CreationDate' && !sortReverse"></span>
+                        <span  class="glyphicon glyphicon glyphicon-triangle-bottom displayBlock" ng-show="sortType == 'CreationDate' && sortReverse"></span>
+                    </div>
+                <!--<span ng-show="sortType == 'CreationDate' && !sortReverse" class="glyphicon glyphicon-triangle-bottom "></span>-->
+                <!--<span ng-show="sortType == 'CreationDate' && sortReverse" class="glyphicon glyphicon-triangle-top "></span>-->
                 </a>
                 </td>
                 <td>
@@ -61,7 +65,7 @@
                 <a  ng-click="sortType = 'phoneNumber'; sortReverse = !sortReverse">
                 Phone Number
                 <span ng-show="sortType == 'phoneNumber' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
-                <span ng-show="sortType == 'phoneNumber' && sortReverse" class="fa fa-caret-up"></span>
+                <span ng-show="sortType == 'phoneNumber' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
                 </a>
                 </td>
                 </tr>

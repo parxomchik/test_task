@@ -30,6 +30,8 @@ app.config(function($routeProvider, $locationProvider) {
 //  controller for home page
 
     app.controller('homePageCtrl', function($scope,$location,$http) {
+        $scope.sortType     = 'CreationDate';                                       // set the default sort type
+        $scope.sortReverse  = false;                                                // set the default sort order
         $scope.clients = [
             {id:1,CreationDate:1112,site: 'Cali Roll', lastname: 2,firstname: 2,email:'qwe@mail.com',phoneNumber:'0933664213'},
             {id:2,CreationDate:1113,site: 'Philly',  lastname: 4,firstname: 2,email:'qwe@mail.com',phoneNumber:'0933664213'},
@@ -59,16 +61,77 @@ app.config(function($routeProvider, $locationProvider) {
                 });
         }
     });
+
 // directive include button intro clients table
 
 app.directive('clientButton', function() {
     return {
         restrict: 'E',
-        template: '<button type="button" class="btn btn-default" ng-click="clientDetails(client.id)" >Default</button>'
+        template: '<button type="button" class="btn viewBtn" ng-click="clientDetails(client.id)" >Take</button>'
     };
 });
 
 app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
+    $scope.phoneNumbers =[{
+        title: 'Home',                                      // home, business ...
+        phoneNumber: '111'
+    },
+        {
+            title: 'Mobile',                                // home, business ...
+            phoneNumber: '222'
+        }
+    ];
+    $scope.userContacts = {
+        id: 1,
+        civilityFlag: '0',
+        lastname: 'Lastname',
+        firstname: 'Firstname',
+        site: 'France',
+        creationDate: '16.08.2015',
+        address : {
+            title:  'Home',
+            line2: '1',
+            postcode: '07300',
+            city: 'Paris',
+            country: 'France'
+        },
+        //phonenumbers:[{
+        //    title: 'Home',                                      // home, business ...
+        //    phonenumber: '0449651365'
+        //},
+        //    {
+        //        title: 'Mobile',                                // home, business ...
+        //        phonenumber: '0933664211'
+        //    }
+        //],
+
+        phoneNumbers:$scope.phoneNumbers,
+        email: 'test@email.com'
+    };
+console.log($scope.userContacts)
+    $scope.submitForm = function() {
+
+        // check to make sure the form is completely valid
+        if ($scope.userContacts.$valid) {
+            alert('our form is amazing');
+            console.log($scope.userContacts);
+        }
+    };
+
+
+
+    $scope.visit = {
+        userAgent: 'User Agent',                                // User Agent of the visitor
+        creationDate: '16.08.2015',                             // Local date time of the visit, we should keep the local
+                                                                //date time with time zone (all our site are on Europe/Paris tz),
+    views: {
+        online: 0,                                              // (count of page online during the visit)
+        offline: 0,                                             // (count of page offline during the visit)
+        offtarget: 0,                                           // (count of page off target during the visit)
+        total: 0                                                // (count of page view during the visit)
+    }
+}
+
 
     $scope.splineChartSettings =  {
         markerLineColor:'#f6a463',                              // set marker dots color
@@ -84,7 +147,7 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
         center: [80, 80],                                       // set pie center point
         data :  [['Online',   27], ['Offline',  45]],           //set pie data
         name: 'Total users',
-        dataLabels: false                                      // disable labels
+        dataLabels: false                                       // disable labels
     };
 
     $scope.highchartsNG = {
@@ -94,16 +157,16 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
         xAxis: {
             categories: $scope.splineChartSettings.xAxis
         },
-        labels: {
-            items: [{
-                html: 'Total fruit consumption',
-                style: {
-                    left: '50px',
-                    top: '18px',
-                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                }
-            }]
-        },
+        //labels: {
+        //    items: [{
+        //        html: 'Total fruit consumption',
+        //        style: {
+        //            left: '50px',
+        //            top: '18px',
+        //            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+        //        }
+        //    }]
+        //},
         series: [{
             type: $scope.splineChartSettings.charType,
             name: $scope.splineChartSettings.chartName,
@@ -126,74 +189,6 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
                 }
         }],
         loading: false
-
-
-
-
-        //title: {
-        //    text: 'Combination chart'
-        //},
-        //xAxis: {
-        //    categories: ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
-        //},
-        //labels: {
-        //    items: [{
-        //        html: 'Total fruit consumption',
-        //        style: {
-        //            left: '50px',
-        //            top: '18px',
-        //            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-        //        }
-        //    }]
-        //},
-        //series: [{
-        //    type: 'column',
-        //    name: 'Jane',
-        //    data: [3, 2, 1, 3, 4]
-        //}, {
-        //    type: 'column',
-        //    name: 'John',
-        //    data: [2, 3, 5, 7, 6]
-        //}, {
-        //    type: 'column',
-        //    name: 'Joe',
-        //    data: [4, 3, 3, 9, 0]
-        //}, {
-        //    type: 'spline',
-        //    name: 'Average',
-        //    data: [3, 2.67, 3, 6.33, 3.33],
-        //    marker: {
-        //        lineWidth: 2,
-        //        lineColor: Highcharts.getOptions().colors[3],
-        //        fillColor: 'white'
-        //    }
-        //}, {
-        //    type: 'pie',
-        //    name: 'Total consumption',
-        //    data: [{
-        //        name: 'Jane',
-        //        y: 13,
-        //        color: Highcharts.getOptions().colors[0] // Jane's color
-        //    }, {
-        //        name: 'John',
-        //        y: 23,
-        //        color: Highcharts.getOptions().colors[1] // John's color
-        //    }, {
-        //        name: 'Joe',
-        //        y: 19,
-        //        color: Highcharts.getOptions().colors[2] // Joe's color
-        //    }],
-        //    center: [100, 80],
-        //    size: 100,
-        //    showInLegend: false,
-        //    dataLabels: {
-        //        enabled: false
-        //    }
-        //}]
-    //});
-
-
-
 
     }
 });

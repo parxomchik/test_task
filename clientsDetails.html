@@ -1,70 +1,3 @@
-<script>
-    $(function () {
-        $('#container1').highcharts({
-            title: {
-                text: 'Combination chart'
-            },
-            xAxis: {
-                categories: ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
-            },
-            labels: {
-                items: [{
-                    html: 'Total fruit consumption',
-                    style: {
-                        left: '50px',
-                        top: '18px',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                    }
-                }]
-            },
-            series: [{
-                type: 'column',
-                name: 'Jane',
-                data: [3, 2, 1, 3, 4]
-            }, {
-                type: 'column',
-                name: 'John',
-                data: [2, 3, 5, 7, 6]
-            }, {
-                type: 'column',
-                name: 'Joe',
-                data: [4, 3, 3, 9, 0]
-            }, {
-                type: 'spline',
-                name: 'Average',
-                data: [3, 2.67, 3, 6.33, 3.33],
-                marker: {
-                    lineWidth: 2,
-                    lineColor: Highcharts.getOptions().colors[3],
-                    fillColor: 'white'
-                }
-            }, {
-                type: 'pie',
-                name: 'Total consumption',
-                data: [{
-                    name: 'Jane',
-                    y: 13,
-                    color: Highcharts.getOptions().colors[0] // Jane's color
-                }, {
-                    name: 'John',
-                    y: 23,
-                    color: Highcharts.getOptions().colors[1] // John's color
-                }, {
-                    name: 'Joe',
-                    y: 19,
-                    color: Highcharts.getOptions().colors[2] // Joe's color
-                }],
-                center: [100, 80],
-                size: 100,
-                showInLegend: false,
-                dataLabels: {
-                    enabled: false
-                }
-            }]
-        });
-    });
-
-</script>
 <div class="container Override">
     <div class="row fill">
         <div class="wrapper">
@@ -74,7 +7,7 @@
             </div>
             <div class="col-md-11 paddingFix">
                 <div class="col-md-5">
-                    <form class="form-horizontal marginTop20 paddingLeft10">
+                    <form name="userContacts" class="form-horizontal marginTop20 paddingLeft10"  ng-submit="submitForm(userContacts)" novalidate>
                         <div class="form-group">
                             <label class="col-sm-3 control-label ">Civility</label>
                             <div class="col-sm-4">
@@ -84,36 +17,51 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : userContacts.firstname.$invalid && !userContacts.firstname.$pristine}">
                             <label class="col-sm-3 control-label">Firstname</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control"  placeholder="Firstname">
+                                <input type="text" class="form-control"  placeholder="Firstname" ng-model="userContacts.firstname" ng-minlength="2" ng-maxlength="15" required>
+                                <p ng-show="userContacts.firstname.$invalid && !userContacts.firstname.$pristine" class="help-block">You name is required.</p>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : userContacts.lastname.$invalid && !userContacts.lastname.$pristine}">
                             <label class="col-sm-3 control-label ">Lastname</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control"  placeholder="Lastname">
+                                <input type="text" class="form-control"  placeholder="Lastname" ng-model="userContacts.lastname" required>
+                                <p ng-show="userContacts.lastname.$invalid && !userContacts.lastname.$pristine" class="help-block">You lastname is required.</p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label ">Email</label>
+                        <div class="form-group" ng-class="{ 'has-error' : userContacts.email.$invalid && !userContacts.email.$pristine}">
+                            <label class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control"  placeholder="Email">
-                            </div>
+                                <input type="email" class="form-control"  placeholder="Email" ng-model="userContacts.email" required>
+                                <p ng-show="userContacts.email.$invalid && !userContacts.email.$pristine" class="help-block">Enter a valid email.</p>                            </div>
                         </div>
-                        <div class="form-group inner-addon left-addon">
-                            <label class="col-sm-3 control-label ">Home phone</label>
+                        <!--<div class="form-group inner-addon left-addon" ng-class="{ 'has-error' : userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine}">-->
+                            <!--<label class="col-sm-3 control-label " ng-model="userContacts.phoneNumbers.title">Home phone</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<span class="glyphicon glyphicon-earphone phoneIcon"></span>-->
+                                <!--<input type="text" class="form-control"  placeholder="Home phone number" ng-model="userContacts.phoneNumbers.phoneNumber[0]" required>-->
+                                <!--<p ng-show="userContacts.lastname.$invalid && !userContacts.lastname.$pristine" class="help-block">You phone number is required.</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group inner-addon left-addon" ng-class="{ 'has-error' : userContacts.phoneNumber.$invalid && !userContacts.phoneNumber.$pristine}">-->
+                            <!--<label class="col-sm-3 control-label ">Mobile phone</label>-->
+                            <!--<p ng-show="userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine" class="help-block">You lastname is required.</p>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<span class="glyphicon glyphicon-earphone phoneIcon"></span>-->
+                                <!--<input type="text" class="form-control"  placeholder="Mobile phone"  ng-model="userContacts.phoneNumbers.phoneNumber[1]" required>-->
+                                <!--<p ng-show="userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine" class="help-block">You lastname is required.</p>-->
+                            <!--</div>-->
+                        <!--</div> -->
+
+                        <div ng-class="{ 'has-error' : userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine}"></div>
+                        <div class="form-group inner-addon left-addon"  ng-repeat="phoneNumber in phoneNumbers">
+                            <label class="col-sm-3 control-label ">{{phoneNumber.title}}</label>
                             <div class="col-sm-8">
                                 <span class="glyphicon glyphicon-earphone phoneIcon"></span>
-                                <input type="text" class="form-control"  placeholder="Home phone number">
-                            </div>
-                        </div>
-                        <div class="form-group inner-addon left-addon">
-                            <label class="col-sm-3 control-label ">Mobile phone</label>
-                            <div class="col-sm-8">
-                                <span class="glyphicon glyphicon-earphone phoneIcon"></span>
-                                <input type="text" class="form-control"  placeholder="Mobile phone">
+                                <input type="text" class="form-control"  placeholder="Home phone number" ng-model="phoneNumber.phoneNumber" required>
+                                <p ng-show="userContacts.lastname.$invalid && !userContacts.lastname.$pristine" class="help-block">You phone number is required.</p>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -133,7 +81,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12 ">
                                     <div class="col-md-6 paddingLeftFix">
-                                        <input type="text" class="form-control "  placeholder="Post code">
+                                        <input type="number" class="form-control "  placeholder="Post code">
                                     </div>
                                     <div class="col-md-6  paddingFix">
                                         <input type="text" class="form-control "  placeholder="City">
@@ -147,7 +95,7 @@
                             </div>
                             <div class="form-group">
                                 <div class=" col-sm-12">
-                                    <button type="submit" class="btn btn-success btn-block">Save</button>
+                                    <button type="submit" class="btn btn-success btn-block" ng-disabled="userContacts.$invalid">Save</button>
                                 </div>
                             </div>
                         </div>
