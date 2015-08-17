@@ -1,6 +1,6 @@
-var app = angular.module('clientPageApp',['ngRoute',"highcharts-ng"]);
+var app = angular.module('clientPageApp',['ngRoute',"highcharts-ng",'ngMessages']);
 
-'use strict'
+'use strict';
 
 //  ng-route config
 // when we go to "/" load homePage.html with homePageCtrl
@@ -72,6 +72,7 @@ app.directive('clientButton', function() {
 });
 
 app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
+
     $scope.phoneNumbers =[
         {
         title: 'Home',                                      // home, business ...
@@ -83,41 +84,30 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
         }
     ];
     $scope.userContacts = {
-        id: 1,
-        civilityFlag: '0',
-        lastname: 'Lastname',
-        firstname: 'Firstname',
-        site: 'France',
-        creationDate: '16.08.2015',
-        address : {
-            title:  'Home',
-            line1: '1',
-            line2: '2',
-            postcode: '07300',
-            city: 'Paris',
-            country: 'France'
-        },
-        phoneNumbers:$scope.phoneNumbers,
-        email: 'test@email.com'
+        //id: 1,
+        //civilityFlag: '0',
+        //lastname: 'Lastname',
+        //firstname: 'Firstname',
+        //site: 'France',
+        //creationDate: '16.08.2015',
+        //address : {
+        //    title:  'Home',
+        //    line1: '1',
+        //    line2: '2',
+        //    postcode: '07300',
+        //    city: 'Paris',
+        //    country: 'France'
+        //},
+        phoneNumbers:$scope.phoneNumbers
+        //email: 'test@email.com'
     };
-console.log($scope.userContacts)
-    $scope.submitForm = function() {
+    $scope.userContactsForm = function() {
 
-        // check to make sure the form is completely valid
-        if ($scope.userContacts.$valid) {
-            alert('our form is amazing');
-            console.log($scope.userContacts);
-        }
+
+        alert('our form is amazing');
+        console.log($scope.userContacts);
     };
 
-    //$scope.submitForm = function(isValid) {
-    //
-    //    // check to make sure the form is completely valid
-    //    if (isValid) {
-    //        alert('our form is amazing');
-    //    }
-    //
-    //};
 
     $scope.visit = {
         userAgent: 'User Agent',                                // User Agent of the visitor
@@ -129,9 +119,7 @@ console.log($scope.userContacts)
         offtarget: 0,                                           // (count of page off target during the visit)
         total: 0                                                // (count of page view during the visit)
     }
-}
-
-
+};
     $scope.splineChartSettings =  {
         markerLineColor:'#f6a463',                              // set marker dots color
         chartName:'Pages per visits',                           // set chart name

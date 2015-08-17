@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-11 paddingFix">
                 <div class="col-md-5">
-                    <form name="userContacts" class="form-horizontal marginTop20 paddingLeft10"  ng-submit="submitForm(userContacts)" novalidate>
+                    <form name="userContactForm" class="form-horizontal marginTop20 paddingLeft10"  ng-submit="userContactsForm(userContact.id)" >
                         <div class="form-group">
                             <label class="col-sm-3 control-label ">Civility</label>
                             <div class="col-sm-4">
@@ -17,72 +17,109 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error' : userContacts.firstname.$invalid && !userContacts.firstname.$pristine}">
+                        <div class="form-group" ng-class="{ 'has-error' : userContactForm.firstname.$invalid && !userContactForm.firstname.$pristine}">
                             <label class="col-sm-3 control-label">Firstname</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control"  placeholder="Firstname" ng-model="userContacts.firstname" ng-minlength="2" ng-maxlength="15" required>
-                                <p ng-show="userContacts.firstname.$invalid && !userContacts.firstname.$pristine" class="help-block">You name is required.</p>
+                                <input type="text" name="firstname" class="form-control"  placeholder="Enter firstname" ng-model="userContacts.firstname" ng-minlength="2" ng-maxlength="30" required>
+                                <div class="help-block" ng-messages="userContactForm.firstname.$error" ng-if="userContactForm.firstname.$touched">
+                                    <p ng-message="minlength">Your name is too short.</p>
+                                    <p ng-message="maxlength">Your name is too long.</p>
+                                    <p ng-message="required">Your name is required.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error' : userContacts.lastname.$invalid && !userContacts.lastname.$pristine}">
+                        <div class="form-group" ng-class="{ 'has-error' : userContactForm.userLastname.$invalid && !userContactForm.userLastname.$pristine}">
                             <label class="col-sm-3 control-label ">Lastname</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control"  placeholder="Lastname" ng-model="userContacts.lastname" required>
-                                <p ng-show="userContacts.lastname.$invalid && !userContacts.lastname.$pristine" class="help-block">You lastname is required.</p>
+                                <input type="text" name="userLastname" class="form-control"  placeholder="Lastname" ng-model="userContacts.lastname" ng-minlength="2" ng-maxlength="30" required>
+                                <div class="help-block" ng-messages="userContactForm.userLastname.$error" ng-if="userContactForm.userLastname.$touched">
+                                    <p ng-message="minlength">Your Lastname is too short.</p>
+                                    <p ng-message="maxlength">Your Lastname is too long.</p>
+                                    <p ng-message="required">Your Lastname is required.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error' : userContacts.email.$invalid && !userContacts.email.$pristine}">
+                        <div class="form-group" ng-class="{ 'has-error' : userContactForm.userEmail.$invalid && !userContactForm.userEmail.$pristine && userContacts.userEmail.$error}">
                             <label class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control"  placeholder="Email" ng-model="userContacts.email" required>
-                                <p ng-show="userContacts.email.$invalid && !userContacts.email.$pristine" class="help-block">Enter a valid email.</p>
+                                <input type="email" name="userEmail" class="form-control"  placeholder="Email" ng-model="userContacts.email" ng-minlength="2" ng-maxlength="30" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+                                <div class="help-block" ng-messages="userContactForm.userEmail.$error" ng-if="userContactForm.userEmail.$touched">
+                                    <p ng-message="minlength">Your email is too short.</p>
+                                    <p ng-message="maxlength">Your email is too long.</p>
+                                    <p ng-message="required">Your email is required.</p>
+                                    <p ng-message="pattern">Please enter a valid email address!</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group inner-addon left-addon"  ng-repeat="phoneNumber in phoneNumbers" ng-class="{ 'has-error' : userContacts.phoneNumbers.$invalid && !userContacts.phoneNumbers.$pristine}">
+                        <div class="form-group inner-addon left-addon"  ng-repeat="phoneNumber in phoneNumbers" ng-class="{ 'has-error' : userContactForm.userPhones.$invalid && !userContactForm.userPhones.$pristine}">
                             <label class="col-sm-3 control-label ">{{phoneNumber.title}}</label>
                             <div class="col-sm-8">
                                 <span class="glyphicon glyphicon-earphone phoneIcon"></span>
-                                <input type="text" class="form-control"  placeholder="{{phoneNumber.title}}" ng-model="phoneNumber.phoneNumber" required>
-                                <p ng-show="userContacts.lastname.$invalid && !userContacts.lastname.$pristine" class="help-block">You phone number is required.</p>
+                                <input type="text" class="form-control" name="userPhones"  placeholder="{{phoneNumber.title}}" ng-model="phoneNumber.phoneNumber" ng-minlength="2" ng-maxlength="30" required>
+                                <div class="help-block" ng-messages="userContactForm.userPhones.$error" ng-if="userContactForm.userPhones.$touched">
+                                    <p ng-message="minlength">Your phone number is too short.</p>
+                                    <p ng-message="maxlength">Your phone number is too long.</p>
+                                    <p ng-message="required">Both phone number is required.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label class="col-sm-12 control-label vcenter">Address1</label>
                         </div>
                         <div class="col-md-8 addressPadding">
-                            <div class="form-group" ng-class="{ 'has-error' : userContacts.address.line1.$invalid && !userContacts.address.line1.$pristine}">
+                            <div class="form-group" ng-class="{ 'has-error' : userContactForm.userAddress1.$invalid && !userContactForm.userAddress1.$pristine}">
                                 <div class="col-sm-12 ">
-                                    <input type="text" class="form-control" ng-model="userContacts.address.line1" placeholder="Adress1" required>
-                                    <p ng-show="userContacts.address.line1.$invalid && !userContacts.address.line1.$pristine" class="help-block">You Address number is required.</p>
+                                    <input type="text" name="userAddress1" class="form-control" ng-model="userContacts.address.line1" placeholder="Adress1" required>
+                                    <div class="help-block" ng-messages="userContactForm.userAddress1.$error" ng-if="userContactForm.userAddress1.$touched">
+                                        <p ng-message="minlength">Your Address is too short.</p>
+                                        <p ng-message="maxlength">Your Address is too long.</p>
+                                        <p ng-message="required">You Address is required.</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" ng-class="{ 'has-error' : userContacts.address.line2.$invalid && !userContacts.address.line2.$pristine}">
+                            <div class="form-group" ng-class="{ 'has-error' : userContactForm.userAddress2.$invalid && !userContactForm.userAddress2.$pristine}">
                                 <div class="col-sm-12 ">
-                                    <input type="text" class="form-control" ng-model="userContacts.address.line2" placeholder="Adress2" required>
-                                    <p ng-show="userContacts.address.line2.$invalid && !userContacts.address.line2.$pristine" class="help-block">You Address is required.</p>
+                                    <input type="text" name="userAddress2" class="form-control" ng-model="userContacts.address.line2" placeholder="Adress2" required>
+                                    <div class="help-block" ng-messages="userContactForm.userAddress2.$error" ng-if="userContactForm.userAddress2.$touched">
+                                        <p ng-message="minlength">Your Address is too short.</p>
+                                        <p ng-message="maxlength">Your Address is too long.</p>
+                                        <p ng-message="required">You Address is required.</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" ng-class="{ 'has-error' : userContacts.address.postcode.$invalid && !userContacts.address.postcode.$pristine && userContacts.address.city.$invalid}">
+                            <div class="form-group" ng-class="{ 'has-error' : userContactForm.postCode.$invalid && !userContactForm.postCode.$pristine}">
                                 <div class="col-sm-12 ">
                                     <div class="col-md-6 paddingLeftFix">
-                                        <input type="number" class="form-control " ng-model="userContacts.address.postcode"  placeholder="Post code" required>
-                                        <p ng-show="userContacts.address.postcode.$invalid && !userContacts.address.postcode.$pristine" class="help-block">You Post code is required.</p>
+                                        <input type="text" name="postCode" class="form-control " ng-model="userContacts.address.postcode"  placeholder="Post code" required>
+                                        <div class="help-block" ng-messages="userContactForm.postCode.$error" ng-if="userContactForm.postCode.$touched">
+                                            <p ng-message="minlength">Your Address is too short.</p>
+                                            <p ng-message="maxlength">Your Address is too long.</p>
+                                            <p ng-message="required">You Address is required.</p>
+                                        </div>
                                     </div>
                                     <div class="col-md-6  paddingFix">
-                                        <input type="text" class="form-control " ng-model="userContacts.address.city"  placeholder="City" required>
-                                        <p ng-show="userContacts.address.city.$invalid && !userContacts.address.city.$pristine" class="help-block">You City is required.</p>
+                                        <input type="text" name="city" class="form-control " ng-model="userContacts.address.city"  placeholder="City" required>
+                                        <div class="help-block" ng-messages="userContactForm.city.$error" ng-if="userContactForm.city.$touched">
+                                            <p ng-message="minlength">Your Address is too short.</p>
+                                            <p ng-message="maxlength">Your Address is too long.</p>
+                                            <p ng-message="required">You Address is required.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" ng-class="{ 'has-error' : userContacts.address.country.$invalid && !userContacts.address.country.$pristine}">
+                            <div class="form-group" ng-class="{ 'has-error' : userContactForm.country.$invalid && !userContactForm.country.$pristine}">
                                 <div class="col-sm-12 ">
-                                    <input type="text" class="form-control" ng-model="userContacts.address.country" placeholder="Country" required>
-                                    <p ng-show="userContacts.address.country.$invalid && !userContacts.address.country.$pristine" class="help-block">You  Country is required.</p>
+                                    <input type="text" name="country" class="form-control" ng-model="userContacts.address.country" placeholder="Country" required>
+                                    <div class="help-block" ng-messages="userContactForm.country.$error" ng-if="userContactForm.country.$touched">
+                                        <p ng-message="minlength">Your Address is too short.</p>
+                                        <p ng-message="maxlength">Your Address is too long.</p>
+                                        <p ng-message="required">You Address is required.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class=" col-sm-12">
-                                    <button type="submit" class="btn btn-success btn-block" ng-disabled="userContacts.$invalid">Save</button>
+                                    <button type="submit" class="btn btn-success btn-block" ng-disabled="userContactForm.$invalid">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +132,6 @@
             </div>
         </div>
     </div>
-</div>
+<!--</div>-->
 
 
