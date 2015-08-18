@@ -23,14 +23,10 @@
                 <td>
                 </td>
                     <td>
-                <a class="displayBlock" ng-click="sortType = 'CreationDate'; sortReverse = !sortReverse">
-                    <div class="col-lg-8 paddingFix">Creation date</div>
-                    <div class="col-lg-1 paddingFix">
-                        <span  class="glyphicon glyphicon-triangle-top displayBlock" ng-show="sortType == 'CreationDate' && !sortReverse"></span>
-                        <span  class="glyphicon glyphicon glyphicon-triangle-bottom displayBlock" ng-show="sortType == 'CreationDate' && sortReverse"></span>
-                    </div>
-                <!--<span ng-show="sortType == 'CreationDate' && !sortReverse" class="glyphicon glyphicon-triangle-bottom "></span>-->
-                <!--<span ng-show="sortType == 'CreationDate' && sortReverse" class="glyphicon glyphicon-triangle-top "></span>-->
+                <a class="displayBlock" ng-click="sortType = 'creationDate'; sortReverse = !sortReverse">
+                    Creation date
+                <span ng-show="sortType == 'creationDate' && !sortReverse" class="glyphicon glyphicon-triangle-bottom "></span>
+                <span ng-show="sortType == 'creationDate' && sortReverse" class="glyphicon glyphicon-triangle-top "></span>
                 </a>
                 </td>
                 <td>
@@ -73,12 +69,12 @@
                 <tbody class="clientsTbodyColor">
                 <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:searchClient">
                 <td><client-button></client-button></td>
-                <td>{{ client.CreationDate }}</td>
+                <td>{{ client.creationDate }}</td>
                 <td>{{ client.site }}</td>
                 <td>{{ client.lastname }}</td>
-                    <td>{{ client.firtname }}</td>
+                    <td>{{ client.firstname }}</td>
                 <td>{{ client.email }}</td>
-                <td>{{ client.phoneNumber }}</td>
+                <td>{{ client.phoneNumbers[0].phoneNumber}}</td>
                 </tr>
                 </tbody>
                 </table>

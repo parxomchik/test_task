@@ -7,7 +7,7 @@ var app = angular.module('clientPageApp',['ngRoute',"highcharts-ng",'ngMessages'
 // $locationProvider disable hashtag in url
 
 
-app.config(function($routeProvider, $locationProvider) {
+app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'homePage.html',
@@ -17,48 +17,43 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: 'clientsDetails.html',
             controller: 'clientsDetailsCtrl'
         })
+        .when('/clientsDetails/:id', {
+            templateUrl: 'clientsDetails.html',
+            controller: 'clientsDetailsCtrl'
+        })
         .otherwise({
-            redirectTo: '/404'
+            redirectTo: '/'
         });
-    //
-    $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
-    });
+});
+
+app.factory('contacts', function($http){
+    return {
+        getContacts: function() {
+            return  $http.get("contacts.json")
+                .success(function (data) {
+                })
+                .error(function (data) {
+                    console.log("WRONG");
+                    console.log(data);
+                });
+        }
+    };
 });
 
 //  controller for home page
+app.controller('homePageCtrl', function($scope,$location,$http,contacts) {
+        var contactsData = function(data) {
+            $scope.clients = angular.fromJson(data);
+            console.log($scope.clients);
+        };
+        contacts.getContacts().success(contactsData);
 
-    app.controller('homePageCtrl', function($scope,$location,$http) {
-        $scope.sortType     = 'CreationDate';                                       // set the default sort type
+        $scope.sortType     = 'creationDate';                                       // set the default sort type
         $scope.sortReverse  = false;                                                // set the default sort order
-        $scope.clients = [
-            {id:1,CreationDate:1112,site: 'Cali Roll', lastname: 2,firstname: 2,email:'qwe@mail.com',phoneNumber:'0933664213'},
-            {id:2,CreationDate:1113,site: 'Philly',  lastname: 4,firstname: 2,email:'qwe@mail.com',phoneNumber:'0933664213'},
-            {id:3,CreationDate:1114,site: 'Tiger',  lastname: 7,firstname: 2,email:'qwe@mail.com',phoneNumber:'0933664213'},
-            {id:4,CreationDate:1115,site: 'Rainbow',  lastname: 6,firstname: 2,email:'qwe@mail.com',phoneNumber:'0933664213'}
-        ];
-
-        //$http.get("/api/contacts")
-        //    .success(function (data) {
-        //        console.log("Success");
-        //        $scope.clients = data;
-        //    })
-        //    .error(function (data) {
-        //        console.log("WRONG");
-        //        console.log(data);
-        //    });
 
         $scope.clientDetails = function (id) {
-            $http.get("/api/contacts/" + id)
-                .success(function (data) {
-                    console.log("Success");
-                    console.log(data);
-                    $location.path("/clientsDetails" + '?id=' + id);
-                })
-                .error(function () {
-                    console.log("WRONG")
-                });
+            console.log(id);
+            $location.path("/clientsDetails/"+id);
         }
     });
 
@@ -71,42 +66,36 @@ app.directive('clientButton', function() {
     };
 });
 
-app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
+app.controller('clientsDetailsCtrl', function($scope,$location,$http,$routeParams,contacts) {
 
-    $scope.phoneNumbers =[
-        {
-        title: 'Home',                                      // home, business ...
-        phoneNumber: ''
-    },
-        {
-            title: 'Mobile',                                // home, business ...
-            phoneNumber: ''
-        }
-    ];
-    $scope.userContacts = {
-        //id: 1,
-        //civilityFlag: '0',
-        //lastname: 'Lastname',
-        //firstname: 'Firstname',
-        //site: 'France',
-        //creationDate: '16.08.2015',
-        //address : {
-        //    title:  'Home',
-        //    line1: '1',
-        //    line2: '2',
-        //    postcode: '07300',
-        //    city: 'Paris',
-        //    country: 'France'
-        //},
-        phoneNumbers:$scope.phoneNumbers
-        //email: 'test@email.com'
-    };
-    $scope.userContactsForm = function() {
-
-
-        alert('our form is amazing');
+    var id = $routeParams.id - 1;
+    var contactsData = function(data) {
+        $scope.userContacts = data[id];
         console.log($scope.userContacts);
     };
+    contacts.getContacts().success(contactsData);
+
+    $scope.userContactsForm = function() {
+        alert('our form is amazing');
+        //console.log($scope.userContacts);
+        //console.log($scope.userContacts.id);
+        $http.post('/api/contacts/:'+ $scope.userContacts.id)
+            .success(function (data) {
+                alert('saved');
+            })
+            .error(function (data) {
+                console.log("WRONG");
+                console.log(data);
+            });
+    };
+    $http.get('/api/contacts/:'+id+'/visits')
+        .success(function (data) {
+            console.log(data)
+        })
+        .error(function (data) {
+            console.log("WRONG");
+            console.log(data);
+        });
 
 
     $scope.visit = {
@@ -114,8 +103,8 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
         creationDate: '16.08.2015',                             // Local date time of the visit, we should keep the local
                                                                 //date time with time zone (all our site are on Europe/Paris tz),
     views: {
-        online: 0,                                              // (count of page online during the visit)
-        offline: 0,                                             // (count of page offline during the visit)
+        online: 156,                                              // (count of page online during the visit)
+        offline: 50,                                             // (count of page offline during the visit)
         offtarget: 0,                                           // (count of page off target during the visit)
         total: 0                                                // (count of page view during the visit)
     }
@@ -179,21 +168,3 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http) {
 
     }
 });
-
-//app.directive('translate', function ($compile, translatorRequest) {
-//    return {
-//        restrict: 'A', //E = element, A = attribute, C = class, M = comment
-//        scope: {
-//            data: '='
-//        },
-//        link: function(scope, element ) {
-//            var html ='<h1>{{replacement}}</h1>';
-//
-//            translatorRequest.afterDataLoaded.then(function(data){
-//                var key = element[0].innerHTML;
-//                scope.replacement = data[key];
-//                element.replaceWith($compile(html)(scope));
-//            });
-//        }
-//    }
-//});
