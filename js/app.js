@@ -4,7 +4,6 @@ var app = angular.module('clientPageApp',['ngRoute',"highcharts-ng",'ngMessages'
 
 //  ng-route config
 // when we go to "/" load homePage.html with homePageCtrl
-// $locationProvider disable hashtag in url
 
 
 app.config(function($routeProvider) {
@@ -90,11 +89,12 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http,$routeParam
     };
     $http.get('/api/contacts/:'+id+'/visits')
         .success(function (data) {
-            console.log(data)
+            $scope.visit = data;
+            //console.log(data)
         })
         .error(function (data) {
             console.log("WRONG");
-            console.log(data);
+            //console.log(data);
         });
 
 
@@ -133,16 +133,6 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http,$routeParam
         xAxis: {
             categories: $scope.splineChartSettings.xAxis
         },
-        //labels: {
-        //    items: [{
-        //        html: 'Total fruit consumption',
-        //        style: {
-        //            left: '50px',
-        //            top: '18px',
-        //            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-        //        }
-        //    }]
-        //},
         series: [{
             type: $scope.splineChartSettings.charType,
             name: $scope.splineChartSettings.chartName,

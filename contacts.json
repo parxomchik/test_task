@@ -1,0 +1,52 @@
+[
+{
+  "id": "1",
+  "civilityFlag": "1",
+  "lastname": "Lastname",
+  "firstname": "Firstname",
+  "site": "druzya.in.ua",
+  "creationDate": "16.08.2015",
+  "address" : {
+    "title":  "Home",
+    "line1": "1",
+    "line2": "2",
+    "postcode": "07300",
+    "city": "Kiev",
+    "country": "Ukraine"
+  },
+  "phoneNumbers": [{
+    "title": "Home",
+    "phoneNumber": "0449651365"
+  },
+    {
+      "title": "Mobile",
+      "phoneNumber": "0933664211"
+    }],
+  "email": "test@email.com"
+},
+  {
+    "id": "2",
+    "civilityFlag": "2",
+    "lastname": "Lastname2",
+    "firstname": "Firstname2",
+    "site": "rozoomka.com",
+    "creationDate": "17.08.2015",
+    "address" : {
+      "title":  "Home",
+      "line1": "1",
+      "line2": "2",
+      "postcode": "07300",
+      "city": "Paris",
+      "country": "France"
+    },
+    "phoneNumbers": [{
+      "title": "Home",
+      "phoneNumber": "04496513653"
+    },
+      {
+        "title": "Mobile",
+        "phoneNumber": "09336642114"
+      }],
+    "email": "test@email.com"
+  }
+]
