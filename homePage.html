@@ -1,30 +1,30 @@
-<div class="container Override">
-    <div class="row fill">
-        <div class="wrapper">
-            <div class="col-md-2 sidebar">
-                <p class="marginTop20">Sites</p>
-                <div class="checkbox">
-                <label>
-                <input type="checkbox" value="">
-                Shop Online
-                </label>
-                </div>
-                <div class="checkbox">
-                <label>
-                <input type="checkbox" value="">
-                Travel
-                </label>
-                </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar paddingTop20">
+            <p class="">Sites</p>
+            <div class="checkbox">
+            <label>
+            <input type="checkbox" value="">
+            Shop Online
+            </label>
             </div>
-            <div class="col-md-10 paddingFix glyphiconSmall">
+            <div class="checkbox">
+            <label>
+            <input type="checkbox" value="">
+            Travel
+            </label>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 paddingFix contentColor">
+            <div class="table-responsive  glyphiconSmall">
                 <table class="table table-striped " >
                 <thead class="" >
                 <tr class="active clientsTheadColor">
                 <td>
                 </td>
-                    <td>
+                <td>
                 <a class="displayBlock" ng-click="sortType = 'creationDate'; sortReverse = !sortReverse">
-                    Creation date
+                Creation date
                 <span ng-show="sortType == 'creationDate' && !sortReverse" class="glyphicon glyphicon-triangle-bottom "></span>
                 <span ng-show="sortType == 'creationDate' && sortReverse" class="glyphicon glyphicon-triangle-top "></span>
                 </a>
@@ -44,10 +44,10 @@
                 </a>
                 </td>
                 <td>
-                <a  ng-click="sortType = 'firtname'; sortReverse = !sortReverse">
+                <a  ng-click="sortType = 'firstname'; sortReverse = !sortReverse">
                 Firstname
-                <span ng-show="sortType == 'firtname' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
-                <span ng-show="sortType == 'firtname' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                <span ng-show="sortType == 'firstname' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>
+                <span ng-show="sortType == 'firstname' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
                 </a>
                 </td>
                 <td>
@@ -72,7 +72,7 @@
                 <td>{{ client.creationDate }}</td>
                 <td>{{ client.site }}</td>
                 <td>{{ client.lastname }}</td>
-                    <td>{{ client.firstname }}</td>
+                <td>{{ client.firstname }}</td>
                 <td>{{ client.email }}</td>
                 <td>{{ client.phoneNumbers[0].phoneNumber}}</td>
                 </tr>
@@ -81,4 +81,89 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="container Override">-->
+    <!--<div class="row fill">-->
+        <!--<div class="wrapper">-->
+            <!--<div class="col-md-2 sidebar">-->
+
+            <!--</div>-->
+            <!--<div class="col-md-10 paddingFix glyphiconSmall">-->
+                <!--<table class="table table-striped " >-->
+                <!--<thead class="" >-->
+                <!--<tr class="active clientsTheadColor">-->
+                <!--<td>-->
+                <!--</td>-->
+                    <!--<td>-->
+                <!--<a class="displayBlock" ng-click="sortType = 'creationDate'; sortReverse = !sortReverse">-->
+                    <!--Creation date-->
+                <!--<span ng-show="sortType == 'creationDate' && !sortReverse" class="glyphicon glyphicon-triangle-bottom "></span>-->
+                <!--<span ng-show="sortType == 'creationDate' && sortReverse" class="glyphicon glyphicon-triangle-top "></span>-->
+                <!--</a>-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--<a  ng-click="sortType = 'site'; sortReverse = !sortReverse">-->
+                <!--Site-->
+                <!--<span ng-show="sortType == 'site' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>-->
+                <!--<span ng-show="sortType == 'site' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>-->
+                <!--</a>-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--<a  ng-click="sortType = 'lastname'; sortReverse = !sortReverse">-->
+                <!--Lastname-->
+                <!--<span ng-show="sortType == 'lastname' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>-->
+                <!--<span ng-show="sortType == 'lastname' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>-->
+                <!--</a>-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--<a  ng-click="sortType = 'firstname'; sortReverse = !sortReverse">-->
+                <!--Firstname-->
+                <!--<span ng-show="sortType == 'firstname' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>-->
+                <!--<span ng-show="sortType == 'firstname' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>-->
+                <!--</a>-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--<a  ng-click="sortType = 'email'; sortReverse = !sortReverse">-->
+                <!--Email-->
+                <!--<span ng-show="sortType == 'email' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>-->
+                <!--<span ng-show="sortType == 'email' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>-->
+                <!--</a>-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--<a  ng-click="sortType = 'phoneNumbers[0].phoneNumber'; sortReverse = !sortReverse">-->
+                <!--Phone Number-->
+                <!--<span ng-show="sortType == 'phoneNumbers[0].phoneNumber' && !sortReverse" class="glyphicon glyphicon glyphicon-triangle-bottom"></span>-->
+                <!--<span ng-show="sortType == 'phoneNumbers[0].phoneNumber' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>-->
+                <!--</a>-->
+                <!--</td>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody class="clientsTbodyColor">-->
+                <!--<tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:searchClient">-->
+                <!--<td><client-button></client-button></td>-->
+                <!--<td>{{ client.creationDate }}</td>-->
+                <!--<td>{{ client.site }}</td>-->
+                <!--<td>{{ client.lastname }}</td>-->
+                    <!--<td>{{ client.firstname }}</td>-->
+                <!--<td>{{ client.email }}</td>-->
+                <!--<td>{{ client.phoneNumbers[0].phoneNumber}}</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->

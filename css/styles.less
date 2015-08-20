@@ -11,14 +11,10 @@
   margin: 0;
   padding: 0;
 }
-
-html, body, .Override.container, .Override .col-md-2, .Override .col-md-10,.col-md-11,.col-md-1
-{
+html, body, .container-fluid,.row,.contentColor {
   height: 100%;
 }
-.container {
-  width: 100%;
-}
+
 .sidebar {
   background-color: @sidebarColor;
   color: @sidebarTextColor;
@@ -32,64 +28,16 @@ html, body, .Override.container, .Override .col-md-2, .Override .col-md-10,.col-
 .marginTop20{
   margin-top: 20px;
 }
-
-//.Override *:before, .Override *:after
-//{
-//  display: none;
-//}
-
-.Override.container:before
-{
-  content: '';
-  display: block;
-  float: left;
-  height: 100%;
+.paddingTop20{
+  padding-top: 20px;
+}
+.paddingTop10{
+  padding-top: 10px;
 }
 
-.Override .fill
-{
-  position: relative;
+.contentColor {
+    background-color: @contentColor;
 }
-.Override .fill:after
-{
-  content: '';
-  display: block;
-  clear: left;
-}
-
-.Override .wrapper
-{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-
-.Override .col-md-2
-{
-  float: left;
-  position: static;
-}
-
-.Override .col-md-10
-{
-  background-color: @contentColor;
-  position: static;
-  overflow: auto;
-}
-.Override .col-md-1
-{
-  float: left;
-  position: static;
-}
-
-.Override .col-md-11
-{
-  background-color: @contentColor;
-  position: static;
-  overflow: auto;
-}
-
 .clientsTheadColor>td>a> {
   color: @tableTheadTextColor;
   cursor: pointer;
@@ -145,8 +93,8 @@ html, body, .Override.container, .Override .col-md-2, .Override .col-md-10,.col-
 }
 
 /* align icon */
-.left-addon .glyphicon  { left:  0px;}
-.right-addon .glyphicon { right: 0px;}
+.left-addon .glyphicon  { left:  0;}
+.right-addon .glyphicon { right: 0;}
 
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
@@ -182,7 +130,6 @@ form .ng-dirty.ng-invalid,
 {
   border: 1px solid #FD0000;
 }
-//.ng-touched
 .help-block p{
   color: #FD0000;
 }
@@ -201,14 +148,14 @@ form .ng-dirty.ng-invalid,
   background-color: @sidebarColorActive;
 }
 
-
+//  button clientDetailsPage
 
 .bubble
 {
   position: relative;
   width: 250px;
   height: 120px;
-  padding: 0px;
+  padding: 0;
   background: #FFFFFF;
 
 }
@@ -226,3 +173,24 @@ form .ng-dirty.ng-invalid,
   right: -1px;
   top: 45px;
 }
+
+
+// sidebar styles
+
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    border-right: 1px solid #eee;
+  }
+}
+

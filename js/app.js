@@ -1,4 +1,4 @@
-var app = angular.module('clientPageApp',['ngRoute',"highcharts-ng",'ngMessages']);
+var app = angular.module('clientPageApp',['ngRoute',"highcharts-ng",'ngMessages','ngResource']);
 
 'use strict';
 
@@ -9,6 +9,10 @@ var app = angular.module('clientPageApp',['ngRoute',"highcharts-ng",'ngMessages'
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
+            templateUrl: 'homePage.html',
+            controller: 'homePageCtrl'
+        })
+        .when('/index.html#/', {
             templateUrl: 'homePage.html',
             controller: 'homePageCtrl'
         })
@@ -38,22 +42,47 @@ app.factory('contacts', function($http){
         }
     };
 });
+//app.factory('contactsResourse',[$resourse,
+//    function($resourse){
+//    return $resourse('restUrl.:format', {
+//        restUsl: 'contacts',
+//        format: 'json'
+//    })
+//}
+//    ]);
+
+app.factory("contactsResourse", function ($resource) {
+    return $resource('contacts.json');
+        //"/api/booking/:Id",
+        //{Id: "@Id" }
+        //{
+        //    "update": {method: "PUT"},
+        //    "reviews": {'method': 'GET', 'params': {'reviews_only': "true"}, isArray: true}
+        //
+        //}
+    //);
+});
 
 //  controller for home page
-app.controller('homePageCtrl', function($scope,$location,$http,contacts) {
-        var contactsData = function(data) {
-            $scope.clients = angular.fromJson(data);
-            console.log($scope.clients);
-        };
-        contacts.getContacts().success(contactsData);
+app.controller('homePageCtrl', function($scope,$location,$http,contactsResourse) {
+    //    var contactsData = function(data) {
+    //    $scope.clients = angular.fromJson(data);
+    //    console.log($scope.clients);
+    //};
+    //contacts.getContacts().success(contactsData);
 
-        $scope.sortType     = 'creationDate';                                       // set the default sort type
+    $scope.clients = contactsResourse.query();
+
+
+
+    $scope.sortType     = 'creationDate';                                       // set the default sort type
         $scope.sortReverse  = false;                                                // set the default sort order
 
         $scope.clientDetails = function (id) {
             console.log(id);
             $location.path("/clientsDetails/"+id);
         }
+
     });
 
 // directive include button intro clients table
@@ -70,9 +99,11 @@ app.controller('clientsDetailsCtrl', function($scope,$location,$http,$routeParam
     var id = $routeParams.id - 1;
     var contactsData = function(data) {
         $scope.userContacts = data[id];
-        console.log($scope.userContacts);
+
     };
     contacts.getContacts().success(contactsData);
+    //$scope.userContacts = contactsResourse.query();
+    //console.log($scope.userContacts);
 
     $scope.userContactsForm = function() {
         alert('our form is amazing');

@@ -1,11 +1,10 @@
-<div class="container Override">
-    <div class="row fill">
-        <div class="wrapper">
-            <div class="col-md-1 sidebar paddingFix">
+<div class="container-fluid">
+    <div class="row">
+            <div class="col-md-1 sidebar paddingFix padTop20">
                 <div class="btn-group-vertical center-block" role="group" aria-label="...">
                     <button type="button" class="btn clientsDelailsBtn active bubble">
                         <span id="contactIcon" class="glyphicon glyphicon glyphicon-user center-block" aria-hidden="true"></span>
-                        <p class="text-center text-uppercase">contact</p>
+                        <p class="text-center text-uppercase paddingTop10">contact</p>
                     </button>
                     <!--<div class="bubble" style="background-color: rgb(255, 255, 255); border-color: rgb(127, 127, 127);">-->
                         <!--&lt;!&ndash;<div class="pointer" style="content: '';position: absolute;border-style: solid;border-width: 15px 0 15px 15px;border-color: transparent #FFFFFF;display: block;width: 0;z-index: 1;right: -15px;top: 45px;">&ndash;&gt;-->
@@ -16,7 +15,7 @@
                 </div>
 
             </div>
-            <div class="col-md-11 paddingFix">
+            <div class="col-md-11 col-md-offset-1 paddingFix contentColor">
                 <div class="col-md-5">
                     <form name="userContactForm" class="form-horizontal marginTop20 paddingLeft10"  ng-submit="userContactsForm(userContact.id)" >
                         <div class="form-group">
@@ -139,10 +138,8 @@
                 <div class="col-md-7">
                     <highchart id="chart1" config="highchartsNG" class="marginTop20"></highchart>
                 </div>
-                </div>
             </div>
-        </div>
     </div>
-<!--</div>-->
+</div>
 
 
